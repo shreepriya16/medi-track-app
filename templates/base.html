@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MediTrack</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>MediTrack — Hospital Equipment System</h1>
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a> |
+        <a href="{{ url_for('add_equipment') }}">Add Equipment</a> |
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    </nav>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+</html>

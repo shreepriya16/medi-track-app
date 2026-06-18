@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ equipment.equipment_name }} ({{ equipment.serial_number }})</h2>
+<p>Department: {{ equipment.department }}</p>
+<p>Status: {{ equipment.status }}</p>
+
+<h3>Maintenance Logs</h3>
+<a href="{{ url_for('add_log', id=equipment.equipment_id) }}">Add Log</a>
+<ul>
+  {% for log in logs %}
+  <li>{{ log.maintenance_date }} — {{ log.technician_name }}: {{ log.issue_reported }} → {{ log.resolution_notes }} (Next due: {{ log.next_due_date }})</li>
+  {% endfor %}
+</ul>
+{% endblock %}

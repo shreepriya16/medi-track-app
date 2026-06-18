@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Equipment List</h2>
+<table>
+  <tr><th>ID</th><th>Name</th><th>Department</th><th>Status</th></tr>
+  {% for item in equipment %}
+  <tr>
+    <td>{{ item.equipment_id }}</td>
+    <td><a href="{{ url_for('equipment_detail', id=item.equipment_id) }}">{{ item.equipment_name }}</a></td>
+    <td>{{ item.department }}</td>
+    <td>{{ item.status }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
