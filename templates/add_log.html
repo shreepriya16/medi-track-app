@@ -1,12 +1,49 @@
 {% extends "base.html" %}
+
 {% block content %}
-<h2>Add Maintenance Log</h2>
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<h2>
+🛠 Add Maintenance Log
+</h2>
+
 <form method="POST">
-  Date: <input type="date" name="maintenance_date"><br>
-  Technician: <input type="text" name="technician_name"><br>
-  Issue: <textarea name="issue_reported"></textarea><br>
-  Resolution: <textarea name="resolution_notes"></textarea><br>
-  Next Due: <input type="date" name="next_due_date"><br>
-  <button type="submit">Add Log</button>
+
+<div class="mb-3">
+<label>Date</label>
+<input class="form-control" type="date" name="maintenance_date">
+</div>
+
+<div class="mb-3">
+<label>Technician</label>
+<input class="form-control" type="text" name="technician_name">
+</div>
+
+<div class="mb-3">
+<label>Issue Reported</label>
+<textarea class="form-control" name="issue_reported"></textarea>
+</div>
+
+<div class="mb-3">
+<label>Resolution Notes</label>
+<textarea class="form-control" name="resolution_notes"></textarea>
+</div>
+
+<div class="mb-3">
+<label>Next Due Date</label>
+<input class="form-control" type="date" name="next_due_date">
+</div>
+
+<button class="btn btn-success">
+Save Log
+</button>
+
 </form>
-{% endblock %}
+
+</div>
+</div>
+
+{% endblock %}s

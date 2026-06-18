@@ -1,17 +1,55 @@
 {% extends "base.html" %}
+
 {% block content %}
-<h2>Add Equipment</h2>
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<h2>
+➕ Add Equipment
+</h2>
+
 <form method="POST">
-  Name: <input type="text" name="equipment_name"><br>
-  Serial: <input type="text" name="serial_number"><br>
-  Department: <input type="text" name="department"><br>
-  Purchase Date: <input type="date" name="purchase_date"><br>
-  Status: <select name="status">
-    <option>Active</option>
-    <option>Under Maintenance</option>
-    <option>Decommissioned</option>
-  </select><br>
-  <button type="submit">Add</button>
+
+<div class="mb-3">
+<label>Name</label>
+<input class="form-control" type="text" name="equipment_name" required>
+</div>
+
+<div class="mb-3">
+<label>Serial Number</label>
+<input class="form-control" type="text" name="serial_number" required>
+</div>
+
+<div class="mb-3">
+<label>Department</label>
+<input class="form-control" type="text" name="department" required>
+</div>
+
+<div class="mb-3">
+<label>Purchase Date</label>
+<input class="form-control" type="date" name="purchase_date">
+</div>
+
+<div class="mb-3">
+<label>Status</label>
+
+<select class="form-select" name="status">
+<option>Active</option>
+<option>Under Maintenance</option>
+<option>Decommissioned</option>
+</select>
+
+</div>
+
+<button class="btn btn-primary">
+Add Equipment
+</button>
+
 </form>
+
+</div>
+</div>
+
 {% endblock %}
-s

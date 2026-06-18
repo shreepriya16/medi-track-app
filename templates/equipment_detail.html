@@ -1,14 +1,131 @@
 {% extends "base.html" %}
-{% block content %}
-<h2>{{ equipment.equipment_name }} ({{ equipment.serial_number }})</h2>
-<p>Department: {{ equipment.department }}</p>
-<p>Status: {{ equipment.status }}</p>
 
-<h3>Maintenance Logs</h3>
-<a href="{{ url_for('add_log', id=equipment.equipment_id) }}">Add Log</a>
-<ul>
-  {% for log in logs %}
-  <li>{{ log.maintenance_date }} — {{ log.technician_name }}: {{ log.issue_reported }} → {{ log.resolution_notes }} (Next due: {{ log.next_due_date }})</li>
-  {% endfor %}
-</ul>
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-4">
+
+        <div class="card shadow">
+            <div class="card-body text-center">
+
+                <h2>🏥</h2>
+
+                <h3>{{ equipment.equipment_name }}</h3>
+
+                <p class="text-muted">
+                    {{ equipment.serial_number }}
+                </p>
+
+                <hr>
+
+                <p>
+                    <strong>Department</strong><br>
+                    {{ equipment.department }}
+                </p>
+
+                <p>
+                    <strong>Status</strong><br>
+
+                    {% if equipment.status == 'Active' %}
+                        <span class="badge bg-success">
+                            Active
+                        </span>
+
+                    {% elif equipment.status == 'Under Maintenance' %}
+                        <span class="badge bg-warning text-dark">
+                            Under Maintenance
+                        </span>
+
+                    {% else %}
+                        <span class="badge bg-danger">
+                            Decommissioned
+                        </span>
+                    {% endif %}
+                </p>
+
+                <a href="{{ url_for('add_log', id=equipment.equipment_id) }}"
+                   class="btn btn-primary w-100">
+                   ➕ Add Maintenance Log
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-8">
+
+        <div class="card shadow">
+
+            <div class="card-body">
+
+                <h3 class="mb-4">
+                    🛠 Maintenance History
+                </h3>
+
+                {% if logs %}
+
+                <table class="table table-hover">
+
+                    <thead class="table-primary">
+
+                        <tr>
+                            <th>Date</th>
+                            <th>Technician</th>
+                            <th>Issue</th>
+                            <th>Resolution</th>
+                            <th>Next Due</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    {% for log in logs %}
+
+                    <tr>
+
+                        <td>{{ log.maintenance_date }}</td>
+
+                        <td>
+                            {{ log.technician_name }}
+                        </td>
+
+                        <td>
+                            {{ log.issue_reported }}
+                        </td>
+
+                        <td>
+                            {{ log.resolution_notes }}
+                        </td>
+
+                        <td>
+                            {{ log.next_due_date }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+                {% else %}
+
+                <div class="alert alert-info">
+                    No maintenance logs available.
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 {% endblock %}

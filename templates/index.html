@@ -1,15 +1,76 @@
 {% extends "base.html" %}
+
 {% block content %}
-<h2>Equipment List</h2>
-<table>
-  <tr><th>ID</th><th>Name</th><th>Department</th><th>Status</th></tr>
-  {% for item in equipment %}
-  <tr>
-    <td>{{ item.equipment_id }}</td>
-    <td><a href="{{ url_for('equipment_detail', id=item.equipment_id) }}">{{ item.equipment_name }}</a></td>
-    <td>{{ item.department }}</td>
-    <td>{{ item.status }}</td>
-  </tr>
-  {% endfor %}
-</table>
+
+<div class="p-5 bg-white rounded shadow-sm mb-4">
+    <h1 class="display-5">
+        🏥 Hospital Equipment Inventory
+    </h1>
+
+    <p class="lead">
+        Monitor equipment, maintenance schedules and hospital assets.
+    </p>
+</div>
+
+<div class="card shadow">
+    <div class="card-body">
+
+        <h3 class="mb-4">
+            Equipment List
+        </h3>
+
+        <table class="table table-hover">
+
+            <thead class="table-primary">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            {% for item in equipment %}
+
+            <tr>
+                <td>{{ item.equipment_id }}</td>
+
+                <td>
+                    <a href="{{ url_for('equipment_detail', id=item.equipment_id) }}">
+                        {{ item.equipment_name }}
+                    </a>
+                </td>
+
+                <td>{{ item.department }}</td>
+
+                <td>
+
+                {% if item.status == 'Active' %}
+                    <span class="badge bg-success">Active</span>
+
+                {% elif item.status == 'Under Maintenance' %}
+                    <span class="badge bg-warning text-dark">
+                        Maintenance
+                    </span>
+
+                {% else %}
+                    <span class="badge bg-danger">
+                        Decommissioned
+                    </span>
+                {% endif %}
+
+                </td>
+            </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+
 {% endblock %}

@@ -1,17 +1,66 @@
 {% extends "base.html" %}
-{% block content %}
-<h2>Dashboard</h2>
-<p>Total Equipment: {{ total }}</p>
-<ul>
-  {% for s in status_counts %}
-  <li>{{ s.status }}: {{ s.count }}</li>
-  {% endfor %}
-</ul>
 
-<h3>Overdue Maintenance</h3>
-<ul>
-  {% for item in overdue %}
-  <li>{{ item.equipment_name }} ({{ item.serial_number }}) — Next due: {{ item.next_due_date }}</li>
-  {% endfor %}
-</ul>
+{% block content %}
+
+<h2 class="mb-4">
+    📊 Dashboard
+</h2>
+
+<div class="row">
+
+<div class="col-md-4">
+    <div class="card bg-primary text-white shadow">
+        <div class="card-body">
+            <h3>{{ total }}</h3>
+            <p>Total Equipment</p>
+        </div>
+    </div>
+</div>
+
+{% for s in status_counts %}
+
+<div class="col-md-4">
+    <div class="card shadow">
+        <div class="card-body">
+            <h4>{{ s.count }}</h4>
+            <p>{{ s.status }}</p>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+</div>
+
+<div class="card mt-4 shadow">
+
+<div class="card-body">
+
+<h3>
+⚠️ Overdue Maintenance
+</h3>
+
+<table class="table">
+
+<tr>
+<th>Name</th>
+<th>Serial</th>
+<th>Next Due Date</th>
+</tr>
+
+{% for item in overdue %}
+
+<tr>
+<td>{{ item.equipment_name }}</td>
+<td>{{ item.serial_number }}</td>
+<td>{{ item.next_due_date }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+</div>
+
 {% endblock %}
