@@ -4,6 +4,9 @@ import os
 
 app = Flask(__name__)
 
+from dotenv import load_dotenv
+load_dotenv()
+
 # Database connection
 def get_db_connection():
     return mysql.connector.connect(
